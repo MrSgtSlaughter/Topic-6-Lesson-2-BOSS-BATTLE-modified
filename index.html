@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topic 6 Lesson 2 Boss Battle – Democracy in Athens</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── CSS VARIABLES ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --marble: #f5f0e8;
+  --marble-dark: #e8e0d0;
+  --stone: #7a6a50;
+  --stone-dark: #4a3c28;
+  --sky: #5b8db8;
+  --sky-light: #a8c8e0;
+  --text: #2a1f0e;
+  --accent: #8b2020;
+  --green: #2d6a2d;
+  --radius: 10px;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-head: 'Cinzel Decorative', serif;
+  --font-size-base: 1.15rem;
+  --line-height: 1.7;
+  --letter-spacing: 0.01em;
+}
+
+/* ACCESSIBILITY OVERRIDES */
+body.font-opendyslexic { --font-body: 'OpenDyslexic', 'Comic Sans MS', cursive; }
+body.font-comic { --font-body: 'Comic Neue', 'Comic Sans MS', cursive; }
+body.font-lexend { --font-body: 'Lexend', Arial, sans-serif; }
+body.font-verdana { --font-body: Verdana, Geneva, sans-serif; }
+body.size-large { --font-size-base: 1.35rem; }
+body.size-xl { --font-size-base: 1.6rem; }
+body.spacing-15 { --line-height: 2; --letter-spacing: 0.04em; }
+body.spacing-2 { --line-height: 2.5; --letter-spacing: 0.07em; }
+body.high-contrast { --marble: #fff; --text: #000; --stone: #333; --stone-dark: #000; --gold: #b8860b; }
+body.dark-mode { --marble: #1a1a2e; --marble-dark: #16213e; --text: #e8dcc8; --stone: #a0906a; --stone-dark: #c8b890; --sky: #2a4a6a; --sky-light: #3a5a7a; }
+body.focus-mode .question-card:not(.focused) { opacity: 0.25; transition: opacity 0.3s; }
+body.focus-mode .question-card.focused { opacity: 1; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  background: var(--marble);
+  color: var(--text);
+  transition: font-size 0.2s, line-height 0.2s, background 0.3s, color 0.3s;
+}
+
+/* ── HEADER ── */
+.page-header {
+  background: linear-gradient(160deg, var(--stone-dark) 0%, #2a1800 60%, var(--accent) 100%);
+  color: var(--gold-light);
+  text-align: center;
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 4px solid var(--gold);
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+.header-title { font-family: var(--font-head); font-size: clamp(1.2rem, 4vw, 2rem); color: var(--gold-light); text-shadow: 0 2px 8px rgba(0,0,0,0.5); margin-bottom: 0.3rem; position: relative; }
+.header-sub { font-size: 1rem; color: var(--sky-light); position: relative; }
+.header-pts { display: inline-block; background: var(--gold); color: var(--stone-dark); font-weight: 700; font-size: 0.9rem; padding: 0.2em 0.8em; border-radius: 20px; margin-top: 0.5rem; position: relative; }
+
+/* ── TOOLBAR ── */
+.a11y-toolbar {
+  background: var(--marble-dark);
+  border-bottom: 2px solid var(--gold);
+  padding: 0.75rem 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.toolbar-label {
+  font-weight: 700; color: var(--stone-dark); font-size: 0.85rem;
+  width: 100%; margin-bottom: 0.2rem;
+}
+.toolbar-group { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.toolbar-group-label { font-size: 0.78rem; font-weight: 700; color: var(--stone); text-transform: uppercase; letter-spacing: 0.05em; }
+.tbtn {
+  padding: 0.35em 0.75em; border-radius: 6px; border: 2px solid var(--stone);
+  background: var(--marble); color: var(--text); cursor: pointer;
+  font-size: 0.82rem; font-weight: 600; transition: all 0.15s;
+}
+.tbtn:hover { background: var(--gold); border-color: var(--gold); color: var(--stone-dark); }
+.tbtn.active { background: var(--gold); border-color: var(--stone-dark); color: var(--stone-dark); }
+.toolbar-select {
+  padding: 0.35em 0.5em; border-radius: 6px; border: 2px solid var(--stone);
+  background: var(--marble); color: var(--text); font-size: 0.82rem; font-family: var(--font-body);
+}
+.toolbar-divider { width: 1px; height: 28px; background: var(--stone); opacity: 0.3; }
+
+/* ── MAIN LAYOUT ── */
+.assignment-wrap { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+/* ── STUDENT INFO ── */
+.student-info-card {
+  background: linear-gradient(135deg, var(--marble-dark), var(--marble));
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.student-info-card h2 { font-family: var(--font-head); font-size: 1rem; color: var(--stone-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+@media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+.info-field label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--stone); margin-bottom: 0.3rem; }
+.info-field input, .info-field select {
+  width: 100%; padding: 0.5em 0.75em;
+  border: 2px solid var(--stone); border-radius: 6px;
+  background: var(--marble); color: var(--text);
+  font-family: var(--font-body); font-size: var(--font-size-base);
+  transition: border-color 0.2s;
+}
+.info-field input:focus, .info-field select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.25); }
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  background: linear-gradient(135deg, var(--stone-dark), var(--stone));
+  color: var(--gold-light);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin-top: 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.section-header h2 { font-family: var(--font-head); font-size: 1rem; }
+.section-header .speak-section { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 0.2em 0.6em; border-radius: 4px; cursor: pointer; font-size: 0.78rem; }
+.section-body {
+  border: 2px solid var(--stone); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 1.25rem;
+  background: var(--marble);
+}
+.section-note {
+  background: #fffbe6; border-left: 4px solid #f0c040;
+  padding: 0.6rem 0.9rem; border-radius: 0 6px 6px 0;
+  font-size: 0.88rem; margin-bottom: 1.25rem; color: #5a4a00;
+}
+body.dark-mode .section-note { background: #2a2a00; color: #f0d080; }
+
+/* ── QUESTION CARDS ── */
+.question-card {
+  border: 1px solid var(--marble-dark);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.1rem;
+  background: var(--marble);
+  transition: opacity 0.3s, box-shadow 0.2s;
+}
+.question-card:focus-within { box-shadow: 0 0 0 3px rgba(201,168,76,0.4); border-color: var(--gold); }
+.q-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--stone); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+.q-text { margin-bottom: 0.6rem; font-size: var(--font-size-base); }
+.speak-btn {
+  background: var(--sky); color: #fff; border: none;
+  border-radius: 50%; width: 32px; height: 32px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0; transition: background 0.15s, transform 0.1s;
+  vertical-align: middle;
+}
+.speak-btn:hover { background: var(--sky-light); transform: scale(1.1); }
+.speak-btn.speaking { background: var(--accent); animation: pulse-speak 0.7s ease-in-out infinite alternate; }
+@keyframes pulse-speak { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+/* ── FILL IN THE BLANK ── */
+.blank-input {
+  border: none; border-bottom: 2px solid var(--stone);
+  background: transparent; color: var(--text);
+  font-family: var(--font-body); font-size: var(--font-size-base);
+  width: 180px; padding: 0.1em 0.3em; margin: 0 0.3em;
+  transition: border-color 0.2s;
+}
+.blank-input:focus { outline: none; border-bottom-color: var(--gold); }
+.blank-input.correct { border-color: var(--green); background: rgba(45,106,45,0.08); }
+.blank-input.incorrect { border-color: var(--accent); background: rgba(139,32,32,0.06); }
+.spelling-warn { font-size: 0.78rem; color: var(--accent); font-style: italic; margin-top: 0.25rem; display: none; }
+.blank-input:focus ~ .spelling-warn { display: block; }
+
+/* ── MULTIPLE CHOICE ── */
+.mc-options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.mc-option { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; }
+.mc-option input[type="radio"] { margin-top: 0.25em; accent-color: var(--gold); transform: scale(1.3); flex-shrink: 0; }
+.mc-option label { cursor: pointer; line-height: var(--line-height); }
+
+/* ── VOCABULARY MATCH ── */
+.vocab-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem; }
+@media (max-width: 620px) { .vocab-container { grid-template-columns: 1fr; } }
+.vocab-column h4 { font-family: var(--font-head); font-size: 0.82rem; color: var(--stone); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; border-bottom: 2px solid var(--gold); padding-bottom: 0.3rem; }
+.vocab-term {
+  padding: 0.55em 0.8em; margin-bottom: 0.5rem;
+  border-radius: 6px; border: 2px solid var(--stone);
+  background: var(--marble-dark); cursor: pointer;
+  font-weight: 600; transition: all 0.15s; user-select: none;
+}
+.vocab-term:hover { border-color: var(--gold); background: rgba(201,168,76,0.12); }
+.vocab-term.selected { border-color: var(--sky); background: rgba(91,141,184,0.15); }
+.vocab-term.matched { border-color: var(--green); background: rgba(45,106,45,0.12); cursor: default; }
+.vocab-def {
+  padding: 0.55em 0.8em; margin-bottom: 0.5rem;
+  border-radius: 6px; border: 2px dashed var(--stone);
+  background: var(--marble); cursor: pointer; transition: all 0.15s; user-select: none;
+}
+.vocab-def:hover { border-color: var(--gold); }
+.vocab-def.selected { border-color: var(--sky); background: rgba(91,141,184,0.1); }
+.vocab-def.matched { border-color: var(--green); background: rgba(45,106,45,0.08); cursor: default; }
+.vocab-instructions { font-size: 0.85rem; color: var(--stone); font-style: italic; margin-bottom: 0.75rem; }
+.vocab-feedback { font-size: 0.88rem; margin-top: 0.75rem; font-weight: 600; }
+.vocab-score { display: inline-block; background: var(--gold); color: var(--stone-dark); padding: 0.2em 0.7em; border-radius: 12px; font-size: 0.85rem; margin-top: 0.5rem; }
+
+/* ── EXTENSIONS ── */
+.video-link-box {
+  background: var(--sky); color: #fff;
+  border-radius: 8px; padding: 0.7rem 1rem;
+  margin: 0.75rem 0; display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; font-weight: 600; font-size: 0.92rem;
+  transition: background 0.15s;
+}
+.video-link-box:hover { background: var(--stone-dark); }
+.essay-textarea {
+  width: 100%; min-height: 200px;
+  border: 2px solid var(--stone); border-radius: 8px;
+  padding: 0.75em 1em;
+  font-family: var(--font-body); font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  background: var(--marble); color: var(--text);
+  resize: vertical; transition: border-color 0.2s;
+  margin-top: 0.5rem;
+}
+.essay-textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.2); }
+.short-input {
+  width: 100%; padding: 0.5em 0.75em;
+  border: 2px solid var(--stone); border-radius: 6px;
+  font-family: var(--font-body); font-size: var(--font-size-base);
+  background: var(--marble); color: var(--text);
+  margin-top: 0.4rem; transition: border-color 0.2s;
+}
+.short-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.2); }
+
+/* ── MOVEABLE IMAGE ── */
+.moveable-container {
+  position: relative; width: 100%; height: 220px;
+  border: 2px dashed var(--stone); border-radius: 8px;
+  background: linear-gradient(135deg, var(--marble-dark), var(--marble));
+  overflow: hidden; margin: 1rem 0;
+}
+.moveable-hint { font-size: 0.78rem; color: var(--stone); text-align: center; margin-bottom: 0.4rem; }
+#moveableImg {
+  position: absolute; width: 140px; cursor: grab; border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: box-shadow 0.15s;
+  user-select: none;
+}
+#moveableImg:active { cursor: grabbing; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+#moveableImg:focus { outline: 3px solid var(--gold); }
+
+/* ── SUBMIT BUTTON ── */
+.submit-section { text-align: center; margin-top: 3rem; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--stone-dark), var(--accent));
+  color: var(--gold-light); font-family: var(--font-head);
+  font-size: 1.1rem; padding: 0.9em 3em; border: 2px solid var(--gold);
+  border-radius: 30px; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+/* ── SCORE DISPLAY ── */
+#score-display {
+  display: none; margin-top: 2rem;
+  background: linear-gradient(135deg, var(--stone-dark), #2a1800);
+  color: var(--gold-light); border: 3px solid var(--gold);
+  border-radius: var(--radius); padding: 2rem; text-align: center;
+}
+#score-display h2 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 0.5rem; }
+#score-number { font-size: 3.5rem; font-weight: 900; color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  .a11y-toolbar { gap: 0.4rem; }
+  .tbtn { font-size: 0.75rem; padding: 0.3em 0.55em; }
+}
+</style>
+</head>
+<body>
+
+<!-- ██████ ACCESSIBILITY TOOLBAR ██████ -->
+<div class="a11y-toolbar" role="toolbar" aria-label="Accessibility tools for all students">
+  <div class="toolbar-label">📚 Helpful Tools — Available to All Students</div>
+
+  <div class="toolbar-group">
+    <span class="toolbar-group-label">Font:</span>
+    <select class="toolbar-select" onchange="setFont(this.value)" aria-label="Choose font">
+      <option value="">Default</option>
+      <option value="font-opendyslexic">OpenDyslexic</option>
+      <option value="font-comic">Comic Neue</option>
+      <option value="font-lexend">Lexend</option>
+      <option value="font-verdana">Verdana</option>
+    </select>
+  </div>
+
+  <div class="toolbar-divider"></div>
+
+  <div class="toolbar-group">
+    <span class="toolbar-group-label">Size:</span>
+    <button class="tbtn" onclick="setSize('')">Default</button>
+    <button class="tbtn" onclick="setSize('size-large')">Larger</button>
+    <button class="tbtn" onclick="setSize('size-xl')">Largest</button>
+  </div>
+
+  <div class="toolbar-divider"></div>
+
+  <div class="toolbar-group">
+    <span class="toolbar-group-label">Spacing:</span>
+    <button class="tbtn" onclick="setSpacing('')">Normal</button>
+    <button class="tbtn" onclick="setSpacing('spacing-15')">1.5×</button>
+    <button class="tbtn" onclick="setSpacing('spacing-2')">2×</button>
+  </div>
+
+  <div class="toolbar-divider"></div>
+
+  <div class="toolbar-group">
+    <button class="tbtn" id="btnDark" onclick="toggleClass('dark-mode','btnDark')">🌙 Dark Mode</button>
+    <button class="tbtn" id="btnContrast" onclick="toggleClass('high-contrast','btnContrast')">⬛ High Contrast</button>
+    <button class="tbtn" id="btnFocus" onclick="toggleClass('focus-mode','btnFocus')">🎯 Focus Mode</button>
+    <button class="tbtn" onclick="stopSpeech()">🔇 Stop Audio</button>
+  </div>
+</div>
+
+<!-- ██████ HEADER ██████ -->
+<header class="page-header">
+  <h1 class="header-title">⚔️ Topic 6 Lesson 2 Boss Battle</h1>
+  <p class="header-sub">Democracy in Athens — Pages 227–231</p>
+  <span class="header-pts">📋 Total Points: 20</span>
+</header>
+
+<div class="assignment-wrap">
+
+  <!-- ══ SECTION 1: STUDENT INFO ══ -->
+  <div class="student-info-card">
+    <h2>📜 Section 1 of 5 — Student Information</h2>
+    <div class="info-grid">
+      <div class="info-field">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" placeholder="Your first name" autocomplete="given-name">
+      </div>
+      <div class="info-field">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" placeholder="Your last name" autocomplete="family-name">
+      </div>
+      <div class="info-field">
+        <label for="hour">Hour *</label>
+        <select id="hour">
+          <option value="">Select your hour</option>
+          <option value="1">1st Hour</option>
+          <option value="2">2nd Hour</option>
+          <option value="5">5th Hour</option>
+          <option value="6">6th Hour</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: FILL IN THE BLANK ══ -->
+  <div>
+    <div class="section-header">
+      <h2>✍️ Section 2 of 5 — Fill in the Blank</h2>
+      <button class="speak-section" onclick="speakText('Section 2, Fill in the Blank. Do not put any punctuation marks. Be careful about spelling and spaces. Use your textbook!')">🔊 Read Directions</button>
+    </div>
+    <div class="section-body">
+      <div class="section-note">⚠️ <strong>DO NOT</strong> use punctuation marks. Watch your spelling and spacing carefully! Use your textbook (pages 227–231).</div>
+
+      <!-- Q1 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 1
+          <button class="speak-btn" onclick="speakText('Question 1. In Athens, Isagoras, the city\'s leading judge, was trying to crush a movement for blank.')" aria-label="Read question 1 aloud">🔊</button>
+        </div>
+        <div class="q-text">In Athens, Isagoras, the city's leading judge, was trying to crush a movement for
+          <input class="blank-input" id="fitb1" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          .
+        </div>
+        <div class="spelling-warn" id="warn1">⚠️ Check spelling and no punctuation!</div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 2
+          <button class="speak-btn" onclick="speakText('Question 2. The blank was a formation of heavily armed foot soldiers who moved together as a unit.')" aria-label="Read question 2 aloud">🔊</button>
+        </div>
+        <div class="q-text">The
+          <input class="blank-input" id="fitb2" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          was a formation of heavily armed foot soldiers who moved together as a unit.
+        </div>
+        <div class="spelling-warn" id="warn2">⚠️ Check spelling and no punctuation!</div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 3
+          <button class="speak-btn" onclick="speakText('Question 3. Cleisthenes increased the power of the blank, which included all male citizens.')" aria-label="Read question 3 aloud">🔊</button>
+        </div>
+        <div class="q-text">Cleisthenes increased the power of the
+          <input class="blank-input" id="fitb3" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          , which included all male citizens.
+        </div>
+        <div class="spelling-warn" id="warn3">⚠️ Check spelling and no punctuation!</div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 4
+          <button class="speak-btn" onclick="speakText('Question 4. Tyrants were usually members of the blank.')" aria-label="Read question 4 aloud">🔊</button>
+        </div>
+        <div class="q-text">Tyrants were usually members of the
+          <input class="blank-input" id="fitb4" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          .
+        </div>
+        <div class="spelling-warn" id="warn4">⚠️ Check spelling and no punctuation!</div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 5
+          <button class="speak-btn" onclick="speakText('Question 5. A blank is a group of people who hear evidence and decide a court case.')" aria-label="Read question 5 aloud">🔊</button>
+        </div>
+        <div class="q-text">A
+          <input class="blank-input" id="fitb5" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          is a group of people who hear evidence and decide a court case.
+        </div>
+        <div class="spelling-warn" id="warn5">⚠️ Check spelling and no punctuation!</div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question-card" data-section="fitb">
+        <div class="q-label">
+          Question 6
+          <button class="speak-btn" onclick="speakText('Question 6. Blank is membership in a community.')" aria-label="Read question 6 aloud">🔊</button>
+        </div>
+        <div class="q-text">
+          <input class="blank-input" id="fitb6" type="text" placeholder="answer" autocomplete="off" oninput="warnSpelling(this)">
+          is membership in a community.
+        </div>
+        <div class="spelling-warn" id="warn6">⚠️ Check spelling and no punctuation!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: VOCABULARY MATCH ══ -->
+  <div>
+    <div class="section-header">
+      <h2>📖 Section 3 of 5 — Vocabulary Match</h2>
+      <button class="speak-section" onclick="speakText('Section 3. Vocabulary. Match the terms with their definitions by clicking a term then clicking the matching definition.')">🔊 Read Directions</button>
+    </div>
+    <div class="section-body">
+      <p class="vocab-instructions">👆 Click a <strong>term</strong> on the left, then click its matching <strong>definition</strong> on the right.</p>
+      <div class="vocab-container">
+        <div class="vocab-column">
+          <h4>Terms</h4>
+          <div class="vocab-term" id="term-repdem" onclick="selectTerm('repdem')" data-id="repdem">
+            Representative Democracy
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Representative Democracy')" aria-label="Hear term">🔊</button>
+          </div>
+          <div class="vocab-term" id="term-oligarchy" onclick="selectTerm('oligarchy')" data-id="oligarchy">
+            Oligarchy
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Oligarchy')" aria-label="Hear term">🔊</button>
+          </div>
+          <div class="vocab-term" id="term-democracy" onclick="selectTerm('democracy')" data-id="democracy">
+            Democracy
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Democracy')" aria-label="Hear term">🔊</button>
+          </div>
+          <div class="vocab-term" id="term-phalanx" onclick="selectTerm('phalanx')" data-id="phalanx">
+            Phalanx
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Phalanx')" aria-label="Hear term">🔊</button>
+          </div>
+          <div class="vocab-term" id="term-tyranny" onclick="selectTerm('tyranny')" data-id="tyranny">
+            Tyranny
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Tyranny')" aria-label="Hear term">🔊</button>
+          </div>
+          <div class="vocab-term" id="term-dirdem" onclick="selectTerm('dirdem')" data-id="dirdem">
+            Direct Democracy
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Direct Democracy')" aria-label="Hear term">🔊</button>
+          </div>
+        </div>
+        <div class="vocab-column">
+          <h4>Definitions</h4>
+          <div class="vocab-def" id="def-repdem" onclick="selectDef('repdem')">
+            Citizens elect others to represent them
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Citizens elect others to represent them')" aria-label="Hear definition">🔊</button>
+          </div>
+          <div class="vocab-def" id="def-oligarchy" onclick="selectDef('oligarchy')">
+            Political power is held by a small group of people
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Political power is held by a small group of people')" aria-label="Hear definition">🔊</button>
+          </div>
+          <div class="vocab-def" id="def-democracy" onclick="selectDef('democracy')">
+            Rule by the people
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Rule by the people')" aria-label="Hear definition">🔊</button>
+          </div>
+          <div class="vocab-def" id="def-phalanx" onclick="selectDef('phalanx')">
+            A formation of heavily armed foot soldiers
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('A formation of heavily armed foot soldiers')" aria-label="Hear definition">🔊</button>
+          </div>
+          <div class="vocab-def" id="def-tyranny" onclick="selectDef('tyranny')">
+            Government run by a strong ruler
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Government run by a strong ruler')" aria-label="Hear definition">🔊</button>
+          </div>
+          <div class="vocab-def" id="def-dirdem" onclick="selectDef('dirdem')">
+            Citizens participate directly in decision making
+            <button class="speak-btn" style="float:right;margin-top:-2px;" onclick="event.stopPropagation();speakText('Citizens participate directly in decision making')" aria-label="Hear definition">🔊</button>
+          </div>
+        </div>
+      </div>
+      <div id="vocab-feedback" class="vocab-feedback"></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: MULTIPLE CHOICE ══ -->
+  <div>
+    <div class="section-header">
+      <h2>🏛️ Section 4 of 5 — Multiple Choice</h2>
+      <button class="speak-section" onclick="speakText('Section 4. Multiple Choice. Choose the best answer for each question.')">🔊 Read Directions</button>
+    </div>
+    <div class="section-body">
+
+      <!-- MC1 -->
+      <div class="question-card" data-section="mc">
+        <div class="q-label">
+          Question 1
+          <button class="speak-btn" onclick="speakText('Question 1. The Athenian Boule, or Council, had this many members.')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">The Athenian Boule or Council had this many members.</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="mc1" value="A"> <span>A) 100</span></label>
+          <label class="mc-option"><input type="radio" name="mc1" value="B"> <span>B) 300</span></label>
+          <label class="mc-option"><input type="radio" name="mc1" value="C"> <span>C) 500</span></label>
+          <label class="mc-option"><input type="radio" name="mc1" value="D"> <span>D) 1000</span></label>
+        </div>
+      </div>
+
+      <!-- MC2 -->
+      <div class="question-card" data-section="mc">
+        <div class="q-label">
+          Question 2
+          <button class="speak-btn" onclick="speakText('Question 2. This leader ended the practice of selling into slavery poor people who could not pay their debts.')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">This leader ended the practice of selling into slavery poor people who could not pay their debts.</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="mc2" value="A"> <span>A) Draco</span></label>
+          <label class="mc-option"><input type="radio" name="mc2" value="B"> <span>B) Solon</span></label>
+          <label class="mc-option"><input type="radio" name="mc2" value="C"> <span>C) Pericles</span></label>
+          <label class="mc-option"><input type="radio" name="mc2" value="D"> <span>D) Cleisthenes</span></label>
+        </div>
+      </div>
+
+      <!-- MC3 TRUE/FALSE -->
+      <div class="question-card" data-section="mc">
+        <div class="q-label">
+          Question 3
+          <button class="speak-btn" onclick="speakText('Question 3. True or False. Democracy in Athens meant rule by all people who lived there.')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text"><strong>(TRUE or FALSE)</strong> Democracy in Athens meant rule by all people who lived there.</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="mc3" value="TRUE"> <span>TRUE</span></label>
+          <label class="mc-option"><input type="radio" name="mc3" value="FALSE"> <span>FALSE</span></label>
+        </div>
+      </div>
+
+      <!-- MC4 -->
+      <div class="question-card" data-section="mc">
+        <div class="q-label">
+          Question 4
+          <button class="speak-btn" onclick="speakText('Question 4. Which of the following was NOT one of the three main parts of Athenian democracy?')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">Which of the following was <strong>NOT</strong> one of the three main parts of Athenian democracy?</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="mc4" value="A"> <span>A) The Council of 500 (Boule)</span></label>
+          <label class="mc-option"><input type="radio" name="mc4" value="B"> <span>B) The Assembly</span></label>
+          <label class="mc-option"><input type="radio" name="mc4" value="C"> <span>C) The Army (Phalanx)</span></label>
+          <label class="mc-option"><input type="radio" name="mc4" value="D"> <span>D) The Court System</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: EXTENSIONS ══ -->
+  <div>
+    <div class="section-header">
+      <h2>🎓 Section 5 of 5 — Extensions</h2>
+      <button class="speak-section" onclick="speakText('Section 5. Extensions. Watch the videos and answer the questions using information from the videos and your readings.')">🔊 Read Directions</button>
+    </div>
+    <div class="section-body">
+
+      <!-- Moveable image area -->
+      <p class="moveable-hint">🖼️ Use <strong>arrow keys</strong> (or drag) to move the image below · Click image to select it first</p>
+      <div class="moveable-container" id="moveableContainer">
+        <img id="moveableImg"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='120' viewBox='0 0 160 120'%3E%3Crect width='160' height='120' fill='%235b8db8'/%3E%3C!-- sky --%3E%3Crect y='75' width='160' height='45' fill='%238a7550'/%3E%3C!-- ground --%3E%3C!-- sun --%3E%3Ccircle cx='130' cy='22' r='14' fill='%23f0d080'/%3E%3C!-- Parthenon columns --%3E%3Crect x='28' y='38' width='104' height='8' fill='%23e8dcc8'/%3E%3Crect x='28' y='80' width='104' height='6' fill='%23d8cbb8'/%3E%3Crect x='32' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='46' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='60' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='74' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='88' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='102' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3Crect x='116' y='46' width='8' height='34' fill='%23e8dcc8'/%3E%3C!-- roof triangle --%3E%3Cpolygon points='24,38 80,18 136,38' fill='%23d4c4a0'/%3E%3C!-- label --%3E%3Crect x='10' y='96' width='140' height='18' rx='4' fill='%23000000' fill-opacity='0.45'/%3E%3Ctext x='80' y='109' text-anchor='middle' font-family='serif' font-size='10' fill='%23f0d080'%3EThe Pnyx — Athens Assembly%3C/text%3E%3C/svg%3E"
+          alt="The Pnyx — where Athenian citizens gathered to vote in the assembly"
+          title="The Pnyx — the assembly hill in Athens (use arrow keys to move)"
+          tabindex="0"
+          style="left:30px; top:30px; width:160px; height:120px;"
+          onkeydown="moveImage(event)"
+          onclick="this.focus()">
+      </div>
+
+      <!-- VIDEO 1 -->
+      <div class="question-card">
+        <div class="q-label">
+          Watch: What did democracy really mean in Athens?
+          <button class="speak-btn" onclick="speakText('Watch the video titled: What did democracy really mean in Athens?')" aria-label="Read label aloud">🔊</button>
+        </div>
+        <a class="video-link-box" href="https://drive.google.com/file/d/1H44feazOknGu3BUJOnjp3RokPaXqv5y6/view?usp=share_link" target="_blank" rel="noopener">
+          🎬 Video 1: What Did Democracy Really Mean in Athens?
+        </a>
+      </div>
+
+      <!-- EXT Q1 -->
+      <div class="question-card">
+        <div class="q-label">
+          Question 1
+          <button class="speak-btn" onclick="speakText('Extension Question 1. Another name for the assembly meeting where eligible Athenian citizens voted is what?')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">Another name for the assembly meeting where eligible Athenian citizens voted is what?</p>
+        <input class="short-input" id="ext1" type="text" placeholder="Your answer..." autocomplete="off">
+      </div>
+
+      <!-- EXT Q2 -->
+      <div class="question-card">
+        <div class="q-label">
+          Question 2
+          <button class="speak-btn" onclick="speakText('Extension Question 2. While there were around 30,000 eligible voters in Athens, only about this many probably actually voted during assembly meetings.')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">While there were around 30,000 eligible voters in Athens, only about this many probably actually voted during assembly meetings.</p>
+        <input class="short-input" id="ext2" type="text" placeholder="Your answer (a number)..." autocomplete="off">
+      </div>
+
+      <!-- EXT Q3 -->
+      <div class="question-card">
+        <div class="q-label">
+          Question 3
+          <button class="speak-btn" onclick="speakText('Extension Question 3. Although most officials in Athens were chosen randomly by lot, which of these were actually elected by voters because their role required special skills and knowledge?')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">Although most officials in Athens were chosen randomly by lot, which of these were actually elected by the voters, because their role required special skills and knowledge?</p>
+        <input class="short-input" id="ext3" type="text" placeholder="Your answer..." autocomplete="off">
+      </div>
+
+      <!-- EXT Q4 -->
+      <div class="question-card">
+        <div class="q-label">
+          Question 4
+          <button class="speak-btn" onclick="speakText('Extension Question 4. This philosopher believed Athenian democracy was run by fools.')" aria-label="Read question aloud">🔊</button>
+        </div>
+        <p class="q-text">This philosopher believed Athenian democracy was "run by fools."</p>
+        <input class="short-input" id="ext4" type="text" placeholder="Your answer..." autocomplete="off">
+      </div>
+
+      <!-- VIDEO 2 -->
+      <div class="question-card">
+        <div class="q-label">
+          Watch: Representative vs. Direct Democracy
+          <button class="speak-btn" onclick="speakText('Watch the video titled: Representative vs Direct Democracy, Power of the People.')" aria-label="Read label aloud">🔊</button>
+        </div>
+        <a class="video-link-box" href="https://drive.google.com/file/d/1lRtdWyoZ3I_PoTjrW6cQ6118qls141Oy/view?usp=sharing" target="_blank" rel="noopener">
+          🎬 Video 2: Representative vs. Direct Democracy — Power of the People
+        </a>
+      </div>
+
+      <!-- ESSAY -->
+      <div class="question-card">
+        <div class="q-label">
+          Paragraph Response — Which is the better form of democracy?
+          <button class="speak-btn" onclick="speakText('Paragraph Response. Using information from both videos and your readings, write a paragraph making an argument for either direct democracy or representative democracy as the better form of government. Begin by stating your argument for one or the other form of democracy, and then provide at least three specific examples as evidence that you relate to your argument. You can use a combination of positive examples about the form you believe is better and negative examples of the form you believe is worse.')" aria-label="Read essay prompt aloud">🔊</button>
+        </div>
+        <p class="q-text">Using information from both videos above and your readings, write a <strong>paragraph</strong> making an argument for either <strong>direct democracy</strong> or <strong>representative democracy</strong> as the better form of government. Begin by stating your argument for one or the other and then provide <strong>at least three (3) specific examples</strong> as evidence. You can use a combination of positive examples about the form you believe is better and negative examples of the form you believe is worse.</p>
+        <textarea class="essay-textarea" id="essayResponse" placeholder="Write your paragraph here..." aria-label="Paragraph response"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SUBMIT ══ -->
+  <div class="submit-section">
+    <button class="submit-btn" onclick="submitAssignment()">⚔️ Finish Boss Battle</button>
+  </div>
+
+  <div id="score-display">
+    <h2>⚔️ Boss Battle Complete!</h2>
+    <div id="score-number" style="font-size:3.5rem;font-weight:900;color:var(--gold);"></div>
+    <p id="score-msg" style="margin-top:0.5rem; font-size:1.1rem;"></p>
+    <div id="score-breakdown" style="margin:1.2rem 0; text-align:left;"></div>
+    <p id="essay-note" style="font-size:0.88rem; color:var(--sky-light); margin-bottom:1rem; font-style:italic;"></p>
+    <div style="margin-top:1rem; background:var(--gold); color:var(--stone-dark); border-radius:10px; padding:1.1rem 1.5rem;">
+      <p style="font-family:var(--font-head); font-size:1.05rem; font-weight:700; letter-spacing:0.04em; margin-bottom:0.5rem;">📧 REPORT YOUR SCORE TO MR. SLAUGHTER VIA EMAIL</p>
+      <a id="emailLink" href="#" style="font-size:1.1rem; font-weight:700; color:var(--stone-dark); text-decoration:underline;">jason.slaughter@pccsk12.com</a>
+    </div>
+  </div>
+
+</div><!-- end assignment-wrap -->
+
+<!-- ██████ JAVASCRIPT ██████ -->
+<script>
+/* ── SPEECH ── */
+let currentUtterance = null;
+function speakText(txt) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(txt);
+  u.rate = 0.9; u.pitch = 1.0; u.lang = 'en-US';
+  window.speechSynthesis.speak(u);
+  currentUtterance = u;
+}
+function stopSpeech() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+}
+
+/* ── ACCESSIBILITY TOOLBAR ── */
+let currentFont = '', currentSize = '', currentSpacing = '';
+function setFont(cls) {
+  if (currentFont) document.body.classList.remove(currentFont);
+  currentFont = cls;
+  if (cls) document.body.classList.add(cls);
+  if (cls === 'font-opendyslexic') {
+    if (!document.getElementById('od-font')) {
+      const lnk = document.createElement('link');
+      lnk.id = 'od-font'; lnk.rel = 'stylesheet';
+      lnk.href = 'https://fonts.cdnfonts.com/css/opendyslexic';
+      document.head.appendChild(lnk);
+    }
+  }
+  if (cls === 'font-lexend') {
+    if (!document.getElementById('lx-font')) {
+      const lnk = document.createElement('link');
+      lnk.id = 'lx-font'; lnk.rel = 'stylesheet';
+      lnk.href = 'https://fonts.googleapis.com/css2?family=Lexend&display=swap';
+      document.head.appendChild(lnk);
+    }
+  }
+}
+function setSize(cls) {
+  if (currentSize) document.body.classList.remove(currentSize);
+  currentSize = cls;
+  if (cls) document.body.classList.add(cls);
+}
+function setSpacing(cls) {
+  if (currentSpacing) document.body.classList.remove(currentSpacing);
+  currentSpacing = cls;
+  if (cls) document.body.classList.add(cls);
+}
+function toggleClass(cls, btnId) {
+  document.body.classList.toggle(cls);
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.toggle('active');
+}
+
+/* ── SPELLING WARNING ── */
+function warnSpelling(inp) {
+  const warn = inp.nextElementSibling;
+  if (!warn) return;
+  const v = inp.value;
+  const hasPunct = /[.,!?;:'"]/.test(v);
+  warn.style.display = (v.length > 0 && hasPunct) ? 'block' : 'none';
+  if (hasPunct) warn.textContent = '⚠️ Remove punctuation marks!';
+  else warn.textContent = '⚠️ Check spelling and no punctuation!';
+}
+
+/* ── FOCUS MODE (click to focus a card) ── */
+document.addEventListener('click', function(e) {
+  if (!document.body.classList.contains('focus-mode')) return;
+  const card = e.target.closest('.question-card');
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('focused'));
+  if (card) card.classList.add('focused');
+});
+
+/* ── VOCAB MATCHING ── */
+let selectedTerm = null, selectedDef = null;
+const vocabPairs = {
+  repdem: 'repdem', oligarchy: 'oligarchy', democracy: 'democracy',
+  phalanx: 'phalanx', tyranny: 'tyranny', dirdem: 'dirdem'
+};
+const matched = {};
+
+function selectTerm(id) {
+  if (matched[id]) return;
+  // deselect previous term
+  document.querySelectorAll('.vocab-term').forEach(t => t.classList.remove('selected'));
+  selectedTerm = id;
+  document.getElementById('term-' + id).classList.add('selected');
+  if (selectedDef !== null) tryMatch();
+}
+function selectDef(id) {
+  if (Object.values(matched).includes(id)) return;
+  document.querySelectorAll('.vocab-def').forEach(d => d.classList.remove('selected'));
+  selectedDef = id;
+  document.getElementById('def-' + id).classList.add('selected');
+  if (selectedTerm !== null) tryMatch();
+}
+function tryMatch() {
+  const t = selectedTerm, d = selectedDef;
+  selectedTerm = null; selectedDef = null;
+  if (vocabPairs[t] === d) {
+    // correct
+    matched[t] = d;
+    const te = document.getElementById('term-' + t);
+    const de = document.getElementById('def-' + d);
+    te.classList.remove('selected'); te.classList.add('matched'); te.style.background = '';
+    de.classList.remove('selected'); de.classList.add('matched'); de.style.background = '';
+    te.innerHTML = '✅ ' + te.textContent.trim();
+    const matchCount = Object.keys(matched).length;
+    const fb = document.getElementById('vocab-feedback');
+    fb.textContent = matchCount === 6 ? '🏆 Perfect! All 6 matched!' : `✅ ${matchCount}/6 matched`;
+    if (matchCount === 6) fb.innerHTML += ' <span class="vocab-score">+6 pts</span>';
+    speakText('Correct!');
+  } else {
+    // wrong — shake
+    const te = document.getElementById('term-' + t);
+    const de = document.getElementById('def-' + d);
+    [te, de].forEach(el => {
+      el.classList.remove('selected');
+      el.style.borderColor = 'var(--accent)';
+      setTimeout(() => { el.style.borderColor = ''; }, 900);
+    });
+    speakText('Try again.');
+  }
+}
+
+/* ── MOVEABLE IMAGE ── */
+const img = document.getElementById('moveableImg');
+let imgX = 30, imgY = 30;
+const STEP = 12;
+
+function moveImage(e) {
+  const container = document.getElementById('moveableContainer');
+  const maxX = container.offsetWidth - img.offsetWidth;
+  const maxY = container.offsetHeight - img.offsetHeight;
+  if (e.key === 'ArrowLeft')  { imgX = Math.max(0, imgX - STEP); e.preventDefault(); }
+  if (e.key === 'ArrowRight') { imgX = Math.min(maxX, imgX + STEP); e.preventDefault(); }
+  if (e.key === 'ArrowUp')    { imgY = Math.max(0, imgY - STEP); e.preventDefault(); }
+  if (e.key === 'ArrowDown')  { imgY = Math.min(maxY, imgY + STEP); e.preventDefault(); }
+  img.style.left = imgX + 'px';
+  img.style.top  = imgY + 'px';
+}
+
+// Mouse drag
+let dragging = false, dragOffX = 0, dragOffY = 0;
+img.addEventListener('mousedown', function(e) {
+  dragging = true;
+  dragOffX = e.clientX - img.getBoundingClientRect().left;
+  dragOffY = e.clientY - img.getBoundingClientRect().top;
+  e.preventDefault();
+});
+document.addEventListener('mousemove', function(e) {
+  if (!dragging) return;
+  const container = document.getElementById('moveableContainer');
+  const rect = container.getBoundingClientRect();
+  imgX = Math.max(0, Math.min(rect.width - img.offsetWidth, e.clientX - rect.left - dragOffX));
+  imgY = Math.max(0, Math.min(rect.height - img.offsetHeight, e.clientY - rect.top - dragOffY));
+  img.style.left = imgX + 'px';
+  img.style.top  = imgY + 'px';
+});
+document.addEventListener('mouseup', function() { dragging = false; });
+
+/* ── AUTO-GRADER DATA ── */
+
+// FITB answers: arrays of accepted keywords (case-insensitive, partial match ok)
+const FITB_KEYS = {
+  fitb1: ['democracy','democratic'],
+  fitb2: ['phalanx'],
+  fitb3: ['assembly','ecclesia'],
+  fitb4: ['nobility','nobles','aristocracy','aristocrats','upper class','wealthy'],
+  fitb5: ['jury','juror'],
+  fitb6: ['citizenship','citizen']
+};
+
+// MC correct answers
+const MC_ANSWERS = { mc1:'C', mc2:'B', mc3:'FALSE', mc4:'C' };
+
+// Extension short-answer keywords (need at least 1 match for credit)
+const EXT_KEYS = {
+  ext1: ['ecclesia','ekklesia','assembly','agora'],
+  ext2: ['6000','6,000','six thousand'],
+  ext3: ['general','generals','strategos','strategoi','military'],
+  ext4: ['plato','socrates','aristotle']
+};
+
+// Essay keywords — needs 3+ distinct keyword hits for full credit
+const ESSAY_KEYS = [
+  'direct democracy','representative democracy','citizens','vote','assembly',
+  'cleisthenes','solon','pericles','phalanx','boule','council','jury','citizenship',
+  'oligarchy','tyranny','equality','rights','participation','elect','represent',
+  'athens','athenian','argument','evidence','because','therefore','however'
+];
+
+/* ── GRADING HELPERS ── */
+function gradeFITB(id, val) {
+  const v = val.toLowerCase().trim();
+  if (!v) return false;
+  return FITB_KEYS[id].some(k => v.includes(k));
+}
+
+function gradeExt(id, val) {
+  const v = val.toLowerCase().trim();
+  if (!v) return false;
+  return EXT_KEYS[id].some(k => v.includes(k));
+}
+
+function gradeEssay(val) {
+  const v = val.toLowerCase();
+  const hits = ESSAY_KEYS.filter(k => v.includes(k));
+  // Full credit (2pts) = 3+ keywords AND 50+ words
+  const wordCount = v.split(/\s+/).filter(w => w.length > 0).length;
+  if (hits.length >= 3 && wordCount >= 50) return { pts: 2, hits, wordCount };
+  if (hits.length >= 1 || wordCount >= 20) return { pts: 1, hits, wordCount };
+  return { pts: 0, hits, wordCount };
+}
+
+/* ── SUBMIT ── */
+function submitAssignment() {
+  const fn = document.getElementById('firstName').value.trim();
+  const ln = document.getElementById('lastName').value.trim();
+  const hr = document.getElementById('hour').value;
+  if (!fn || !ln || !hr) {
+    alert('Please fill in your first name, last name, and hour before submitting!');
+    return;
+  }
+  const hourLabel = hr === '1' ? '1st' : hr === '2' ? '2nd' : hr + 'th';
+
+  // ── SECTION 2: FITB (6 pts, 1 each) ──
+  let fitbPts = 0;
+  const fitbResults = [];
+  ['fitb1','fitb2','fitb3','fitb4','fitb5','fitb6'].forEach((id,i) => {
+    const val = document.getElementById(id).value.trim();
+    const correct = gradeFITB(id, val);
+    if (correct) fitbPts++;
+    fitbResults.push({ q: i+1, val, correct });
+    // Visual feedback on input
+    const el = document.getElementById(id);
+    el.className = 'blank-input ' + (val ? (correct ? 'correct' : 'incorrect') : '');
+  });
+
+  // ── SECTION 3: VOCAB (6 pts, 1 each) ──
+  const vocabPts = Object.keys(matched).length;
+
+  // ── SECTION 4: MC (4 pts, 1 each) ──
+  let mcPts = 0;
+  const mcResults = [];
+  Object.keys(MC_ANSWERS).forEach((name,i) => {
+    const sel = document.querySelector('input[name="' + name + '"]:checked');
+    const chosen = sel ? sel.value : null;
+    const correct = chosen === MC_ANSWERS[name];
+    if (correct) mcPts++;
+    mcResults.push({ q: i+1, chosen, correct, answer: MC_ANSWERS[name] });
+  });
+
+  // ── SECTION 5: EXTENSIONS ──
+  // Ext Q1–Q4: 1 pt each = 4 pts
+  let extPts = 0;
+  const extResults = [];
+  ['ext1','ext2','ext3','ext4'].forEach((id,i) => {
+    const val = document.getElementById(id).value.trim();
+    const correct = gradeExt(id, val);
+    if (correct) extPts++;
+    extResults.push({ q: i+1, val, correct });
+  });
+
+  // Essay: 2 pts max
+  const essayVal = document.getElementById('essayResponse').value.trim();
+  const essayGrade = gradeEssay(essayVal);
+
+  // ── TOTALS ──
+  // FITB 6 + Vocab 6 + MC 4 + Ext 4 + Essay 2 = 22 possible → scale to 20
+  const rawTotal = fitbPts + vocabPts + mcPts + extPts + essayGrade.pts;
+  const maxRaw = 22;
+  const finalScore = Math.round((rawTotal / maxRaw) * 20);
+
+  // ── BUILD BREAKDOWN ──
+  const breakdown = [
+    { label: 'Fill in the Blank', pts: fitbPts, max: 6 },
+    { label: 'Vocabulary Match', pts: vocabPts, max: 6 },
+    { label: 'Multiple Choice', pts: mcPts, max: 4 },
+    { label: 'Short Answer (Extensions)', pts: extPts, max: 4 },
+    { label: 'Paragraph Response', pts: essayGrade.pts, max: 2 }
+  ];
+
+  const breakdownHTML = breakdown.map(b => {
+    const pct = b.max > 0 ? b.pts / b.max : 0;
+    const color = pct === 1 ? '#2d6a2d' : pct >= 0.5 ? '#7a6a00' : '#8b2020';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.35em 0;border-bottom:1px solid rgba(255,255,255,0.15);">' +
+      '<span style="font-size:0.95rem;">' + b.label + '</span>' +
+      '<span style="font-weight:700;background:' + color + ';color:#fff;padding:0.15em 0.6em;border-radius:10px;font-size:0.9rem;">' + b.pts + '/' + b.max + '</span>' +
+      '</div>';
+  }).join('');
+
+  const essayNote = essayGrade.pts === 2
+    ? '✅ Paragraph: Strong response with ' + essayGrade.wordCount + ' words and key terms found.'
+    : essayGrade.pts === 1
+    ? '🟡 Paragraph: Partial credit — ' + essayGrade.wordCount + ' words. Try to include more key terms and examples.'
+    : '❌ Paragraph: Missing or too brief — no credit awarded.';
+
+  // ── DISPLAY ──
+  const display = document.getElementById('score-display');
+  document.getElementById('score-number').textContent = finalScore + ' / 20';
+  document.getElementById('score-msg').textContent = 'Completed by ' + fn + ' ' + ln + ' — ' + hourLabel + ' Hour';
+  document.getElementById('score-breakdown').innerHTML = breakdownHTML;
+  document.getElementById('essay-note').textContent = essayNote;
+  display.style.display = 'block';
+
+  // ── MAILTO ──
+  const emailBody =
+    'Mr. Slaughter,\n\nHere is my Topic 6 Lesson 2 Boss Battle score:\n\n' +
+    'Name: ' + fn + ' ' + ln + '\nHour: ' + hourLabel + '\n\n' +
+    '=== SCORE BREAKDOWN ===\n' +
+    breakdown.map(b => b.label + ': ' + b.pts + '/' + b.max).join('\n') +
+    '\n\nFINAL SCORE: ' + finalScore + '/20\n\n' +
+    essayNote + '\n\nThank you!';
+
+  const subject = encodeURIComponent('Boss Battle Score – ' + fn + ' ' + ln + ' – ' + hourLabel + ' Hour – ' + finalScore + '/20');
+  document.getElementById('emailLink').href = 'mailto:jason.slaughter@pccsk12.com?subject=' + encodeURIComponent(decodeURIComponent(subject)) + '&body=' + encodeURIComponent(emailBody);
+
+  display.scrollIntoView({ behavior: 'smooth' });
+  speakText('Boss Battle complete! Your score is ' + finalScore + ' out of 20. Report your score to Mr. Slaughter via email.');
+}
+</script>
+</body>
+</html>
